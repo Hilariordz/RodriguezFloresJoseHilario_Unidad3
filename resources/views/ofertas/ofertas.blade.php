@@ -30,40 +30,45 @@
 
     <div class="flex justify-center flex-wrap gap-6 mt-6">
         <!-- Teléfono -->
-        <div class="flex flex-col items-center">
-            <div class="bg-white text-[#1d336a] p-4 rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h2l.4 2M7 10l2 2-3 3m4-2h6m2 0h2M15 16v2a2 2 0 01-2 2H7a2 2 0 01-2-2v-2"/>
+        <div class="flex flex-col items-center group">
+            <div class="bg-white text-[#1d336a] p-4 rounded-full transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#2563eb] group-hover:text-white shadow-lg">
+                <!-- Heroicon: Phone -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h2.28a2 2 0 011.94 1.515l.518 2.072a2 2 0 01-.45 1.958l-1.27 1.27a16.001 16.001 0 006.586 6.586l1.27-1.27a2 2 0 011.958-.45l2.072.518A2 2 0 0121 18.72V21a2 2 0 01-2 2h-1C9.163 23 1 14.837 1 5V4a2 2 0 012-2z" />
                 </svg>
             </div>
             <span class="mt-2 text-sm">Teléfono</span>
         </div>
 
         <!-- WhatsApp -->
-        <div class="flex flex-col items-center">
-            <div class="bg-white text-[#1d336a] p-4 rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20 2H4a2 2 0 00-2 2v16l4-4h14a2 2 0 002-2V4a2 2 0 00-2-2z"/>
+        <div class="flex flex-col items-center group">
+            <div class="bg-white text-[#1d336a] p-4 rounded-full transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#22c55e] group-hover:text-white shadow-lg">
+                <!-- Heroicon: Chat Bubble Left Ellipsis (simula WhatsApp) -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.77 9.77 0 01-4-.8l-4 1 1-4A8.96 8.96 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
             </div>
             <span class="mt-2 text-sm">WhatsApp</span>
         </div>
 
         <!-- Videollamada -->
-        <div class="flex flex-col items-center">
-            <div class="bg-white text-[#1d336a] p-4 rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14m0-4v4m0-4H5a2 2 0 00-2 2v2m0-4v6a2 2 0 002 2h10a2 2 0 002-2v-2" />
+        <div class="flex flex-col items-center group">
+            <div class="bg-white text-[#1d336a] p-4 rounded-full transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#f59e42] group-hover:text-white shadow-lg">
+                <!-- Heroicon: Video Camera -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14m0-4v4m0-4H5a2 2 0 00-2 2v2m0-4v6a2 2 0 002 2h10a2 2 0 002-2v-2" />
                 </svg>
             </div>
             <span class="mt-2 text-sm">Videollamada</span>
         </div>
 
         <!-- Sucursales -->
-        <div class="flex flex-col items-center">
-            <div class="bg-white text-[#1d336a] p-4 rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5s-3 1.343-3 3 1.343 3 3 3zM12 2a9 9 0 00-9 9c0 5.25 9 13 9 13s9-7.75 9-13a9 9 0 00-9-9z" />
+        <div class="flex flex-col items-center group">
+            <div class="bg-white text-[#1d336a] p-4 rounded-full transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#eab308] group-hover:text-white shadow-lg">
+                <!-- Heroicon: Map Pin -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5s-3 1.343-3 3 1.343 3 3 3z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 2a9 9 0 00-9 9c0 5.25 9 13 9 13s9-7.75 9-13a9 9 0 00-9-9z" />
                 </svg>
             </div>
             <span class="mt-2 text-sm">Sucursales</span>

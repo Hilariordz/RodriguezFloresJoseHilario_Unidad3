@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <meta name="csrf-token" content="{{ csrf_token() }}" />
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <style>
   * {
     margin: 0;
@@ -313,6 +314,26 @@
     box-shadow: 0 20px 40px rgba(37,99,235,0.18);
     transform: scale(1.07);
   }
+
+  /* Animaciones personalizadas para Font Awesome y tarjetas */
+  @keyframes fa-beat {
+    0%, 100% { transform: scale(1); }
+    20% { transform: scale(1.2); }
+    40% { transform: scale(0.95); }
+    60% { transform: scale(1.1); }
+    80% { transform: scale(0.98); }
+  }
+  .fa-beat {
+    animation: fa-beat 0.7s 1;
+  }
+  @keyframes fa-shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+  }
+  .fa-shake {
+    animation: fa-shake 0.6s 1;
+  }
 </style>
 
 <div class="hero">
@@ -564,165 +585,102 @@
   </div>
 </section>
 
-<section class="max-w-6xl mx-auto px-4 py-16">
-  <h2 class="text-3xl font-bold text-center mb-8">Explora el mundo con VoyaGo</h2>
-  <div class="relative">
-    <div id="carousel" class="overflow-x-auto flex space-x-6 snap-x snap-mandatory scroll-smooth no-scrollbar">
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+    <!-- Imagen y Botón -->
+    <div class="relative">
+      <img src="https://images.pexels.com/photos/1268855/pexels-photo-1268855.jpeg" alt="Destino 1" class="absolute top-0 left-0 w-48 shadow-xl rounded-lg transform -rotate-6">
+      <img src="https://images.pexels.com/photos/586687/pexels-photo-586687.jpeg" alt="Destino 2" class="relative z-10 w-64 mx-auto shadow-xl rounded-lg">
     </div>
-    <button id="prevBtn" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow hover:bg-gray-200 z-10">‹</button>
-    <button id="nextBtn" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow hover:bg-gray-200 z-10">›</button>
+
+    <!-- Texto -->
+    <div>
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">Por qué elegirnos para tus vacaciones</h2>
+      <p class="text-gray-600 mb-4">
+        Cumplimos con estándares modernos brindando soluciones confiables. Reorganizamos recursos globales mientras distribuimos estrategias dinámicas. Coordinamos mejoras 24/7 fuera de lo convencional.
+      </p>
+      <p class="text-gray-600">
+        Extendemos asociaciones centradas en el usuario antes de interfaces interactivas. Brindamos servicios superiores adaptados a la web moderna.
+      </p>
+    </div>
   </div>
-</section>
 
-<br><br>
-<section
-  class="relative h-64 bg-cover bg-center"
-  style="background-image: url('https://images.unsplash.com/photo-1465256410760-10640339c72c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8TWV4aWNvfGVufDB8fDB8fHww');">
-  <!-- Overlay negro semitransparente -->
-  <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-
-  <!-- Contenido -->
-  <div class="absolute top-1/2 left-8 transform -translate-y-1/2 bg-yellow-300 p-4 rounded-lg shadow-lg max-w-sm relative z-10">
-    <h2 class="text-xl font-bold mb-2">Ofertas en escapadas de verano</h2>
-    <p class="text-sm mb-2">
-      Encuentra ofertas de vuelo. Las noches de VoyaGo acumulan recompensas y están con tu membresía.
-    </p>
-    <button class="bg-black text-white px-4 py-2 text-sm rounded">Ver ofertas de vuelos</button>
+  <!-- Estadísticas -->
+  <div class="mt-16 grid grid-cols-2 md:grid-cols-4 text-center gap-6">
+    <div>
+      <h3 class="text-3xl font-bold text-gray-900">120+</h3>
+      <p class="text-gray-600">Destinos</p>
+    </div>
+    <div>
+      <h3 class="text-3xl font-bold text-gray-900">500+</h3>
+      <p class="text-gray-600">Paquetes</p>
+    </div>
+    <div>
+      <h3 class="text-3xl font-bold text-gray-900">12k+</h3>
+      <p class="text-gray-600">Viajeros</p>
+    </div>
+    <div>
+      <h3 class="text-3xl font-bold text-gray-900">7k+</h3>
+      <p class="text-gray-600">Opiniones positivas</p>
+    </div>
   </div>
-</section>
-<div class="content-wrapper eva-3-container module-TextModule section section-12">
-  <div class="bg-color-wrapper"><text>
-      <div class="content-wrapper text-align-"><tag-text class="title-content">
-          <h2 class="eva-3-h2 tag-text-heading">¿Cómo disfrutar al máximo tu próximo viaje?</h2>
-        </tag-text><tag-text class="text-content">
-          <p class="eva-3-body-1">
-          <div>Ya sea una escapada breve, un viaje de negocios o esas merecidas vacaciones que tanto deseas, los&nbsp;<a href="https://www.bestday.com.mx/paquetes/" target="_blank" class="eva-3-link">paquetes de viajes</a>&nbsp;son la opción ideal para ti. Con los paquetes de VoyaGo accedes a precios accesibles ya que un paquete turístico ofrece un precio más económico que el que tendríamos contratando cada servicio por separado.</div>
-          <div><br></div>
-          <div>Cuantas más combinaciones realices, más barato será el costo total de tus vacaciones pudiendo utilizar el dinero ahorrado en el destino elegido. Por si fuera poco, puedes comprar tus paquetes con tarjetas de diferentes bancos, en muchos meses sin intereses y hasta puedes aprovechar beneficios exclusivos en múltiples destinos incluso en temporada alta.</div>
-          <div><br></div>
-          <div>Otros tips que te permitirán conseguir el&nbsp;<b class="-eva-3-bold">viaje más barato</b>&nbsp;son los siguientes:</div>
-          <div><br></div>
-          <div>
-            <ul class="with-bullet">
-              <li>Suscríbete al newsletter de VoyaGo para recibir ofertas exclusivas de&nbsp;<b class="-eva-3-bold">viajes</b>&nbsp;antes que los demás y aprovechar los precios más bajos.</li>
-              <li>Planifica tus vacaciones en temporada baja. Esto reduce considerablemente el precio de tus vacaciones al igual que comprar tu viaje con al menos 6 meses de antelación.</li>
-              <li>Ten 2 o 3 alternativas de destinos. De esta manera, tienes más posibilidades de encontrar ofertas que valen la pena.</li>
-            </ul>
-          </div>
-          </p>
-        </tag-text></div>
-    </text></div>
-</div>
-<h2>¿Por qué reservar tus vacaciones en VoyaGo?</h2>
 
-<section class="bg-white py-12 px-4">
-  <h2 class="text-3xl font-bold text-center mb-10">¿Por qué reservar tus vacaciones en VoyaGo?</h2>
+ 
 
-  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+  <section class="bg-gradient-to-b from-white to-yellow-50 py-20 px-6">
+  <h2 class="text-4xl font-bold text-center text-gray-800 mb-16">
+    ¿Por qué reservar tus vacaciones en <span class="text-yellow-500">VoyaGo</span>?
+  </h2>
+
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
 
     <!-- Tarjeta 1 -->
-    <div class="bg-yellow-100 rounded-2xl shadow-lg p-6 flex flex-col">
-      <h3 class="text-xl font-semibold mb-4 text-yellow-800">Atención personalizada</h3>
-      <p class="text-gray-700 text-sm leading-relaxed">
-        En VoyaGo no eres un número más. Te guiamos paso a paso desde el primer clic hasta tu regreso a casa. Chatea con nosotros, agenda una videollamada o visítanos. Estamos aquí para ayudarte a planear el viaje perfecto.
+    <div class="bg-white rounded-2xl shadow-md p-8 hover:shadow-2xl transition duration-300 transform hover:scale-105">
+      <div class="flex items-center mb-4">
+        <svg class="w-8 h-8 text-yellow-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 10h.01M12 10h.01M16 10h.01M9 16h6M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <h3 class="text-lg font-semibold text-gray-800">Atención personalizada</h3>
+      </div>
+      <p class="text-gray-600 text-sm leading-relaxed">
+        En VoyaGo no eres un número más. Te guiamos paso a paso desde el primer clic hasta tu regreso a casa. Chatea con nosotros, agenda una videollamada o visítanos.
       </p>
     </div>
 
     <!-- Tarjeta 2 -->
-    <div class="bg-yellow-100 rounded-2xl shadow-lg p-6 flex flex-col">
-      <h3 class="text-xl font-semibold mb-4 text-yellow-800">Paquetes hechos a tu medida</h3>
-      <p class="text-gray-700 text-sm leading-relaxed">
-        Vuelo, hotel, traslados, tours... tú eliges qué incluir. Armamos tu paquete ideal para que viajes sin estrés y con todo resuelto. Personaliza tu experiencia con solo unos clics y aprovecha nuestras ofertas especiales.
+    <div class="bg-white rounded-2xl shadow-md p-8 hover:shadow-2xl transition duration-300 transform hover:scale-105">
+      <div class="flex items-center mb-4">
+        <svg class="w-8 h-8 text-yellow-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 10h18M3 6h18M3 14h18M3 18h18"/></svg>
+        <h3 class="text-lg font-semibold text-gray-800">Paquetes hechos a tu medida</h3>
+      </div>
+      <p class="text-gray-600 text-sm leading-relaxed">
+        Vuelo, hotel, traslados, tours... tú eliges qué incluir. Personaliza tu experiencia con solo unos clics y aprovecha nuestras ofertas especiales.
       </p>
     </div>
 
     <!-- Tarjeta 3 -->
-    <div class="bg-yellow-100 rounded-2xl shadow-lg p-6 flex flex-col">
-      <h3 class="text-xl font-semibold mb-4 text-yellow-800">Pagos flexibles</h3>
-      <p class="text-gray-700 text-sm leading-relaxed">
-        No dejes que el presupuesto limite tus planes. Reserva ahora y paga después con nuestras opciones a meses sin intereses. Además, tenemos promociones exclusivas cada semana para que viajes gastando menos.
+    <div class="bg-white rounded-2xl shadow-md p-8 hover:shadow-2xl transition duration-300 transform hover:scale-105">
+      <div class="flex items-center mb-4">
+        <svg class="w-8 h-8 text-yellow-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8c-1.657 0-3 1.343-3 3v1h6v-1c0-1.657-1.343-3-3-3z"/><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg>
+        <h3 class="text-lg font-semibold text-gray-800">Pagos flexibles</h3>
+      </div>
+      <p class="text-gray-600 text-sm leading-relaxed">
+        Reserva ahora y paga después con meses sin intereses. Promociones exclusivas cada semana para que viajes sin preocuparte por el bolsillo.
       </p>
     </div>
 
     <!-- Tarjeta 4 -->
-    <div class="bg-yellow-100 rounded-2xl shadow-lg p-6 flex flex-col">
-      <h3 class="text-xl font-semibold mb-4 text-yellow-800">Destinos para todos los gustos</h3>
-      <p class="text-gray-700 text-sm leading-relaxed">
-        Ya sea que sueñes con la playa, una ciudad cosmopolita o un pueblo mágico, en VoyaGo lo hacemos realidad. Descubre destinos increíbles en México y el mundo, con recomendaciones pensadas para ti.
+    <div class="bg-white rounded-2xl shadow-md p-8 hover:shadow-2xl transition duration-300 transform hover:scale-105">
+      <div class="flex items-center mb-4">
+        <svg class="w-8 h-8 text-yellow-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A2 2 0 013 15.382V8.618a2 2 0 011.553-1.894L9 4m6 16l5.447-2.724A2 2 0 0021 15.382V8.618a2 2 0 00-1.553-1.894L15 4"/></svg>
+        <h3 class="text-lg font-semibold text-gray-800">Destinos para todos los gustos</h3>
+      </div>
+      <p class="text-gray-600 text-sm leading-relaxed">
+        Playa, ciudad o pueblo mágico... Descubre lugares increíbles en México y el mundo, con experiencias pensadas especialmente para ti.
       </p>
     </div>
 
   </div>
 </section>
 
-<script>
-  const data = [
-    {
-      place: 'Patagonia - Argentina',
-      title: 'EL CHALTÉN',
-      title2: 'Fitz Roy',
-      description:
-        "Nestled in the Patagonian Andes, El Chaltén is Argentina's trekking capital. Its trails lead adventurers to breathtaking views of Mount Fitz Roy and glacial lakes.",
-      image: 'https://images.unsplash.com/photo-1596224302786-81bfc980b8ce',
-    },
-    {
-      place: 'Iceland',
-      title: 'JÖKULSÁRLÓN',
-      title2: 'Glacial Lagoon',
-      description:
-        "This stunning glacial lagoon is filled with floating icebergs. Witness seals swimming and the dramatic beauty of Iceland's nature.",
-      image: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9',
-    },
-    {
-      place: 'Norway',
-      title: 'LOFOTEN',
-      title2: 'Islands',
-      description:
-        "Dramatic peaks, Northern Lights, and picturesque villages make Lofoten a top destination for photography and exploration.",
-      image: 'https://images.unsplash.com/photo-1505245208761-ba872912fac0',
-    },
-    {
-      place: 'Vietnam',
-      title: 'HA LONG',
-      title2: 'Bay',
-      description:
-        "Ha Long Bay is famous for its emerald waters and limestone islands. Explore by boat and enjoy nature's beauty.",
-      image: 'https://images.unsplash.com/photo-1518684079-b46c1141c18f',
-    },
-    {
-      place: 'New Zealand',
-      title: 'MILFORD',
-      title2: 'Sound',
-      description:
-        "Towering cliffs and rainforests await you in this glacial fiord in New Zealand. A must-see for nature lovers.",
-      image: 'https://images.unsplash.com/photo-1595433707802-5ffb43f7eb2a',
-    },
-    {
-      place: 'Tanzania',
-      title: 'SERENGETI',
-      title2: 'National Park',
-      description:
-        "Witness the Great Migration and vast savannah landscapes teeming with wildlife in Serengeti National Park.",
-      image: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9b',
-    },
-  ];
-
-  const carouselContainer = document.getElementById('carousel');
-  data.forEach((item) => {
-    const card = document.createElement('div');
-    card.className = 'min-w-[300px] max-w-xs bg-white rounded-xl shadow-md overflow-hidden snap-center';
-    card.innerHTML = `
-      <img src="${item.image}" class="w-full h-48 object-cover" alt="${item.title}">
-      <div class="p-4">
-        <p class="text-sm text-gray-500">${item.place}</p>
-        <h3 class="text-xl font-bold">${item.title}</h3>
-        <h4 class="text-lg font-semibold text-blue-700">${item.title2}</h4>
-        <p class="text-sm mt-2 text-gray-700">${item.description}</p>
-      </div>
-    `;
-    carouselContainer.appendChild(card);
-  });
-</script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {

@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\BusquedaController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ViajeController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,6 +22,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Rutas para dashboard AJAX
+    Route::get('/api/planeados', [BusquedaController::class, 'planeados']);
+    Route::get('/api/activos', [BusquedaController::class, 'activos']);
+    Route::get('/api/pasados', [BusquedaController::class, 'pasados']);
+    Route::post('/api/planeados', [BusquedaController::class, 'crearPlaneado']);
 });
 Route::resource('destinos', DestinoController::class);
 Route::view('/help', 'help')->name('help');
@@ -70,5 +76,11 @@ Route::post('/busquedas/ajax', function (Request $request) {
         'resultados' => $resultados
     ]);
 });
+Route::post('/busqueda', [BusquedaController::class, 'buscar'])->name('busqueda');
+Route::get('/planeados', [ViajeController::class, 'planeados']);
+Route::get('/activos', [ViajeController::class, 'activos']);
+Route::get('/pasados', [ViajeController::class, 'pasados']);
+Route::post('/planeados', [ViajeController::class, 'guardar']);
+Route::post('/busquedas/ajax', [BusquedaController::class, 'buscarAjax'])->name('busquedas.ajax');
 
 require __DIR__.'/auth.php';
