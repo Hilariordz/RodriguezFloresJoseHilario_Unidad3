@@ -1,10 +1,14 @@
 <x-guest-layout>
+    <x-slot name="logo">
+        <div class="flex justify-center mb-6">
+            <img src="/images/Voyago.png" alt="Voyago Logo" class="h-16 w-auto">
+        </div>
+    </x-slot>
     <form method="POST" action="{{ route('password.store') }}">
         @csrf
 
         <!-- Password Reset Token -->
         <input type="hidden" name="token" value="{{ $request->route('token') }}">
-r
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Correo')" />

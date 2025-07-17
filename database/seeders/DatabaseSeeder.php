@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         // Crear usuario administrador
         $this->call([
             AdminSeeder::class,
+            AgenteSeeder::class,
         ]);
     }
 }

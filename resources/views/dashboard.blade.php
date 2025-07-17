@@ -16,41 +16,52 @@
             <!-- Cotizar Viaje -->
             <div id="cotizar" class="bg-white/90 rounded-lg shadow-md p-6 flex flex-col">
                 <h2 class="text-xl font-semibold text-blue-800 mb-4">Cotizar un Viaje</h2>
-                <form>
+                <form id="cotizarForm">
+                    @csrf
                     <div class="mb-3">
                         <label class="block text-gray-700 mb-1">Destino</label>
-                        <input type="text" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Ej. Cancún, París...">
+                        <input name="destino" type="text" class="w-full border border-gray-300 rounded px-3 py-2" required>
                     </div>
                     <div class="mb-3">
                         <label class="block text-gray-700 mb-1">Fecha de salida</label>
-                        <input type="date" class="w-full border border-gray-300 rounded px-3 py-2">
+                        <input name="fecha_salida" type="date" class="w-full border border-gray-300 rounded px-3 py-2" required>
                     </div>
                     <div class="mb-3">
                         <label class="block text-gray-700 mb-1">Fecha de regreso</label>
-                        <input type="date" class="w-full border border-gray-300 rounded px-3 py-2">
+                        <input name="fecha_regreso" type="date" class="w-full border border-gray-300 rounded px-3 py-2" required>
                     </div>
                     <div class="mb-3">
                         <label class="block text-gray-700 mb-1">Personas</label>
-                        <input type="number" min="1" class="w-full border border-gray-300 rounded px-3 py-2" value="1">
+                        <input name="personas" type="number" min="1" class="w-full border border-gray-300 rounded px-3 py-2" value="1" required>
                     </div>
                     <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 rounded-lg mt-2 transition">Cotizar</button>
                 </form>
+                <div id="cotizacionResult"></div>
             </div>
 
             <!-- Viajes Guardados -->
             <div class="bg-white/90 rounded-lg shadow-md p-6 flex flex-col">
                 <h2 class="text-xl font-semibold text-yellow-700 mb-4">Tus Viajes Guardados</h2>
                 <ul class="divide-y divide-gray-200">
-                    <!-- Ejemplo de viaje guardado -->
-                    <li class="py-2 flex items-center justify-between">
-                        <span>París, Francia</span>
-                        <button class="text-blue-700 hover:underline">Ver detalles</button>
-                    </li>
-                    <li class="py-2 flex items-center justify-between">
-                        <span>Tokio, Japón</span>
-                        <button class="text-blue-700 hover:underline">Ver detalles</button>
-                    </li>
-                    <!-- Aquí se mostrarán los viajes guardados dinámicamente -->
+                    @if(isset($es_nuevo) && $es_nuevo)
+                        {{-- No mostrar mensaje, solo el apartado vacío --}}
+                    @else
+                        @forelse($viajes as $viaje)
+                            <li class="py-2 flex items-center justify-between">
+                                <span>{{ $viaje->destino }}</span>
+                                <div>
+                                    <a href="{{ route('viajes.show', $viaje->id) }}" class="text-blue-700 hover:underline">Ver detalles</a>
+                                    <form action="{{ route('viajes.destroy', $viaje->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="text-red-600 hover:underline" onclick="return confirm('¿Eliminar este viaje?')">Eliminar</button>
+                                    </form>
+                                </div>
+                            </li>
+                        @empty
+                            <li>No tienes viajes guardados.</li>
+                        @endforelse
+                    @endif
                 </ul>
                 <div class="mt-4 text-right">
                     <a href="#" class="text-blue-700 hover:underline">Ver todos</a>
@@ -61,16 +72,18 @@
             <div class="bg-white/90 rounded-lg shadow-md p-6 flex flex-col">
                 <h2 class="text-xl font-semibold text-green-700 mb-4">Reservaciones y Viajes Pasados</h2>
                 <ul class="divide-y divide-gray-200">
-                    <!-- Ejemplo de reservación pasada -->
-                    <li class="py-2 flex items-center justify-between">
-                        <span>Madrid, España - 12/05/2024</span>
-                        <button class="text-blue-700 hover:underline">Ver recibo</button>
-                    </li>
-                    <li class="py-2 flex items-center justify-between">
-                        <span>Riviera Maya - 20/03/2024</span>
-                        <button class="text-blue-700 hover:underline">Ver recibo</button>
-                    </li>
-                    <!-- Aquí se mostrarán las reservaciones dinámicamente -->
+                    @if(isset($es_nuevo) && $es_nuevo)
+                        {{-- No mostrar mensaje, solo el apartado vacío --}}
+                    @else
+                        @forelse($reservaciones as $res)
+                            <li class="py-2 flex items-center justify-between">
+                                <span>{{ $res->destino }} - {{ \Carbon\Carbon::parse($res->fecha_regreso)->format('d/m/Y') }}</span>
+                                <a href="{{ route('viajes.show', $res->id) }}" class="text-blue-700 hover:underline">Ver recibo</a>
+                            </li>
+                        @empty
+                            <li>No tienes reservaciones pasadas.</li>
+                        @endforelse
+                    @endif
                 </ul>
                 <div class="mt-4 text-right">
                     <a href="#" class="text-blue-700 hover:underline">Ver historial completo</a>
@@ -92,3 +105,39 @@
         </div>
     </div>
 </div>
+
+<script>
+document.getElementById('cotizarForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    let form = e.target;
+    let data = new FormData(form);
+
+    fetch('{{ route('viajes.cotizar') }}', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: data
+    })
+    .then(res => res.json())
+    .then(res => {
+        document.getElementById('cotizacionResult').innerHTML = `
+            <div class="mt-4 p-4 bg-green-100 rounded">
+                <p><strong>Destino:</strong> ${res.cotizacion.destino}</p>
+                <p><strong>Fechas:</strong> ${res.cotizacion.fecha_salida} a ${res.cotizacion.fecha_regreso}</p>
+                <p><strong>Personas:</strong> ${res.cotizacion.personas}</p>
+                <p><strong>Precio estimado:</strong> $${res.precio} MXN</p>
+                <form method="POST" action="{{ route('viajes.guardar') }}">
+                    @csrf
+                    <input type="hidden" name="destino" value="${res.cotizacion.destino}">
+                    <input type="hidden" name="fecha_salida" value="${res.cotizacion.fecha_salida}">
+                    <input type="hidden" name="fecha_regreso" value="${res.cotizacion.fecha_regreso}">
+                    <input type="hidden" name="personas" value="${res.cotizacion.personas}">
+                    <input type="hidden" name="precio" value="${res.precio}">
+                    <button type="submit" class="mt-2 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded">Guardar Viaje</button>
+                </form>
+            </div>
+        `;
+    });
+});
+</script>

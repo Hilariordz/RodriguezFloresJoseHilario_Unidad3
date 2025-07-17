@@ -10,23 +10,23 @@ use App\Http\Controllers\BusquedaController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ViajeController;
 use App\Models\User;
+use App\Http\Controllers\SolicitudAyudaController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    $user = auth()->user();
-    $planeados = \App\Models\Viaje::where('estado', 'planeado')->where('user_id', $user->id ?? 0)->get();
-    $activos = \App\Models\Viaje::where('estado', 'activo')->where('user_id', $user->id ?? 0)->get();
-    $pasados = \App\Models\Viaje::where('estado', 'pasado')->where('user_id', $user->id ?? 0)->get();
-    $ofertas = [
-        ['titulo' => 'Descuento en Cancún', 'descripcion' => 'Aprovecha 20% de descuento en hoteles seleccionados.'],
-        ['titulo' => 'Vuelos a Madrid', 'descripcion' => 'Vuelos directos desde $4999 MXN.'],
-        ['titulo' => 'Paquetes a la Riviera Maya', 'descripcion' => 'Todo incluido desde $8999 MXN.'],
-    ];
-    return view('dashboard', compact('planeados', 'activos', 'pasados', 'ofertas'));
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [ViajeController::class, 'dashboard'])->name('dashboard');
+    Route::post('/viajes/cotizar', [ViajeController::class, 'cotizar'])->name('viajes.cotizar');
+    Route::post('/viajes/guardar', [ViajeController::class, 'guardar'])->name('viajes.guardar');
+    Route::get('/viajes/{id}', [ViajeController::class, 'show'])->name('viajes.show');
+    Route::delete('/viajes/{id}', [ViajeController::class, 'destroy'])->name('viajes.destroy');
+    // Nuevas rutas para vistas de usuario
+    Route::get('/user/cotizar', [ViajeController::class, 'cotizarView'])->name('user.cotizar');
+    Route::get('/user/guardados', [ViajeController::class, 'guardadosView'])->name('user.guardados');
+    Route::get('/user/pasados', [ViajeController::class, 'pasadosView'])->name('user.pasados');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -175,4 +175,30 @@ Route::middleware(['auth', 'admin'])->group(function () {
     })->name('admin.destinos.actualizar');
 });
 
+// Rutas solo para agentes
+Route::middleware(['auth', 'agente'])->group(function () {
+    Route::get('/agente', function() {
+        return view('agente.dashboard');
+    })->name('agente.dashboard');
+    // Panel completo del agente
+    Route::get('/agente/panel', function() {
+        return view('agente.panel');
+    })->name('agente.panel');
+
+    // Gestión de clientes (CRUD y ver historial)
+    Route::resource('/agente/clientes', App\Http\Controllers\AgenteClienteController::class, [
+        'as' => 'agente'
+    ]);
+    Route::get('/agente/clientes/{cliente}/historial', [App\Http\Controllers\AgenteClienteController::class, 'historial'])->name('agente.clientes.historial');
+});
+
 Route::view('/atencion', 'atencion')->name('atencion');
+
+// Ruta para que el usuario envíe solicitud de ayuda
+Route::post('/solicitud-ayuda', [SolicitudAyudaController::class, 'store'])->name('solicitud.ayuda.enviar');
+
+// Rutas para agentes: ver y responder solicitudes
+Route::middleware(['auth', 'agente'])->group(function () {
+    Route::get('/agente/solicitudes', [SolicitudAyudaController::class, 'index'])->name('agente.solicitudes');
+    Route::post('/agente/solicitudes/{id}/responder', [SolicitudAyudaController::class, 'responder'])->name('agente.solicitudes.responder');
+});

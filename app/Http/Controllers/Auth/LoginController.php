@@ -34,6 +34,14 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended('/dashboard');
+        // Redirigir según el rol del usuario
+        $user = Auth::user();
+        if ($user->role === 'agente') {
+            return redirect()->intended('/agente');
+        } elseif ($user->role === 'admin') {
+            return redirect()->intended('/admin');
+        } else {
+            return redirect()->intended('/dashboard');
+        }
     }
 }

@@ -16,6 +16,13 @@ return new class extends Migration
             $table->string('nombre');
             $table->text('descripcion')->nullable();
             $table->enum('estado', ['planeado', 'activo', 'pasado']);
+            // NUEVOS CAMPOS PARA LA APP INTERACTIVA
+            $table->string('destino')->nullable();
+            $table->date('fecha_salida')->nullable();
+            $table->date('fecha_regreso')->nullable();
+            $table->integer('personas')->nullable();
+            $table->decimal('precio', 10, 2)->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
         });
         
